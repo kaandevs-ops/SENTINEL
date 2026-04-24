@@ -159,11 +159,11 @@ class WeatherAlertCollector:
 class NewsCollector:
     # GDELT API (2026) requires OR groups in parentheses and rejects very short timespans.
     # Keep this conservative to reduce rate-limits while ensuring non-empty results.
-    GDELT_URL = (
-        "https://api.gdeltproject.org/api/v2/doc/doc"
-        "?query=%28conflict%20OR%20attack%20OR%20disaster%20OR%20threat%29"
-        "&mode=artlist&maxrecords=50&format=json&timespan=1h"
-    )
+    BBC_URLS = [
+        "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "https://feeds.bbci.co.uk/news/technology/rss.xml",
+        "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml",
+    ]
 
     def __init__(self, cache):
         self.cache = cache
@@ -193,33 +193,39 @@ class NewsCollector:
         self._running = False
 
     async def _fetch(self) -> List[dict]:
-        timeout = aiohttp.ClientTimeout(total=20)
-        try:
-            async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.get(self.GDELT_URL) as resp:
-                    if resp.status != 200:
-                        return []
-                    raw = await resp.json(content_type=None)
-        except Exception:
-            return []
-        items = [
-            {
-                "id":       (art.get("url") or "")[-64:],
-                "type":     "news",
-                "title":    art.get("title", ""),
-                "url":      art.get("url", ""),
-                "source":   art.get("domain", ""),
-                "country":  art.get("sourcecountry", ""),
-                "seendate": art.get("seendate", ""),
-                "latitude":  None,
-                "longitude": None,
-                "geo_precision": None,
-            }
-            for art in (raw.get("articles") or [])
-        ]
-        if settings.NEWS_GEO_ENABLED and settings.NEWS_GEO_PROVIDER == "restcountries":
-            await self._enrich_country_centroids(items)
-        return items
+        import xml.etree.ElementTree as ET
+        timeout = aiohttp.ClientTimeout(total=15)
+        headers = {"User-Agent": "SENTINEL/1.0"}
+        items = []
+        for url in self.BBC_URLS:
+            try:
+                async with aiohttp.ClientSession(timeout=timeout, headers=headers) as session:
+                    async with session.get(url) as resp:
+                        if resp.status != 200:
+                            continue
+                        text = await resp.text()
+                root = ET.fromstring(text)
+                for idx, item in enumerate(root.findall(".//item")):
+                    title = (item.findtext("title") or "").strip()
+                    link = (item.findtext("link") or "").strip()
+                    desc = (item.findtext("description") or "").strip()
+                    pub_date = (item.findtext("pubDate") or "").strip()
+                    source = url.split("/")[4] if len(url.split("/")) > 4 else "bbc"
+                    items.append({
+                        "id": f"news:{idx}:{abs(hash(link))}",
+                        "type": "news",
+                        "title": title,
+                        "url": link,
+                        "source": "bbc",
+                        "country": "",
+                        "seendate": pub_date,
+                        "latitude": None,
+                        "longitude": None,
+                        "geo_precision": None,
+                    })
+            except Exception:
+                continue
+        return items[:50]
 
     async def _enrich_country_centroids(self, items: List[dict]) -> None:
         """
