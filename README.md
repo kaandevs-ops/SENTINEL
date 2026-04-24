@@ -101,3 +101,25 @@ REDIS_URL=redis://localhost:6379
 ## 📄 License
 
 Apache License 2.0 — see [LICENSE](LICENSE)
+
+---
+
+## 📸 Screenshots
+
+### 🌍 Live Globe — 7,000+ Aircraft + Satellites
+![Globe](docs/screenshots/01_globe_live_flights_satellites.png)
+
+### 🔴 FLIR Mode — Human Assets Tracking
+![FLIR](docs/screenshots/02_flir_mode_human_assets.png)
+
+### ▶️ Playback Mode — Historical Replay
+![Playback](docs/screenshots/03_playback_anime_mode.png)
+
+### 🗺️ Route Ops — Corridor Intelligence
+![Route Ops](docs/screenshots/04_route_ops_corridor.png)
+
+### 📰 News Feed — Live OSINT Dashboard
+![News](docs/screenshots/05_news_feed_dashboard.png)
+
+### 🌑 NOIR Mode — GPS Jamming + AI Chat
+![NOIR](docs/screenshots/06_noir_gps_jamming_ai_chat.png)
