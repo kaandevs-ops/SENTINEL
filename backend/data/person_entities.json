@@ -1,0 +1,57 @@
+{
+  "data_version": 1,
+  "updated_at": "2026-04-23T00:00:00Z",
+  "persons": [
+    {
+      "id": "PRS-001",
+      "full_name": "Alp Demir",
+      "nickname": "Falcon",
+      "role": "field_analyst",
+      "status": "active",
+      "risk_level": "low",
+      "country": "TR",
+      "city": "Bursa",
+      "latitude": 40.195,
+      "longitude": 29.06,
+      "phone": "+90-555-0101",
+      "email": "alp.demir@local.test",
+      "skills": ["osint", "sigint", "route_planning"],
+      "notes": "Regional analyst profile used for local testing.",
+      "last_seen": "2026-04-23T08:10:00Z"
+    },
+    {
+      "id": "PRS-002",
+      "full_name": "Ece Yalcin",
+      "nickname": "Orbit",
+      "role": "satcom_operator",
+      "status": "active",
+      "risk_level": "medium",
+      "country": "DE",
+      "city": "Berlin",
+      "latitude": 52.52,
+      "longitude": 13.405,
+      "phone": "+49-555-0102",
+      "email": "ece.yalcin@local.test",
+      "skills": ["satellite_ops", "signals_triage", "comms_security"],
+      "notes": "Handles comms and satellite handovers.",
+      "last_seen": "2026-04-23T07:45:00Z"
+    },
+    {
+      "id": "PRS-003",
+      "full_name": "Mert Kaya",
+      "nickname": "Anchor",
+      "role": "maritime_specialist",
+      "status": "standby",
+      "risk_level": "high",
+      "country": "GB",
+      "city": "London",
+      "latitude": 51.507,
+      "longitude": -0.128,
+      "phone": "+44-555-0103",
+      "email": "mert.kaya@local.test",
+      "skills": ["ais_analysis", "port_intelligence", "incident_response"],
+      "notes": "Specialist used for route incident simulation.",
+      "last_seen": "2026-04-23T06:15:00Z"
+    }
+  ]
+}
