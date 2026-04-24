@@ -4,6 +4,28 @@ A full-stack, real-time global intelligence dashboard built with **CesiumJS**, *
 
 ---
 
+## 📸 Screenshots
+
+### 🌍 Live Globe — 7,000+ Aircraft + Satellites
+![Globe](docs/screenshots/01_globe_live_flights_satellites.png)
+
+### 🔴 FLIR Mode — Human Assets Tracking
+![FLIR](docs/screenshots/02_flir_mode_human_assets.png)
+
+### ▶️ Playback Mode — Historical Replay
+![Playback](docs/screenshots/03_playback_anime_mode.png)
+
+### 🗺️ Route Ops — Corridor Intelligence
+![Route Ops](docs/screenshots/04_route_ops_corridor.png)
+
+### 📰 News Feed — Live OSINT Dashboard
+![News](docs/screenshots/05_news_feed_dashboard.png)
+
+### 🌑 NOIR Mode — GPS Jamming + AI Chat
+![NOIR](docs/screenshots/06_noir_gps_jamming_ai_chat.png)
+
+---
+
 ## 🌍 Live Data Sources
 
 | Layer | Source | Count |
@@ -13,7 +35,7 @@ A full-stack, real-time global intelligence dashboard built with **CesiumJS**, *
 | 🚢 Ships | AIS (simulated) | ~16 |
 | 🔥 Wildfires | NASA EONET v3 | ~200 |
 | 🌍 Earthquakes | USGS | real-time |
-| 📰 News | GDELT | ~50 |
+| 📰 News | BBC World RSS | ~50 |
 | ⚔️ Conflicts | BBC World RSS | live |
 | 🧪 Cyber IOCs | URLhaus | ~500 |
 | 📷 Cameras | OpenStreetMap Overpass | ~440 |
@@ -63,7 +85,7 @@ cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env  # configure your API keys
+cp .env.example .env
 uvicorn main:app --reload --port 8000
 ```
 
@@ -101,25 +123,3 @@ REDIS_URL=redis://localhost:6379
 ## 📄 License
 
 Apache License 2.0 — see [LICENSE](LICENSE)
-
----
-
-## 📸 Screenshots
-
-### 🌍 Live Globe — 7,000+ Aircraft + Satellites
-![Globe](docs/screenshots/01_globe_live_flights_satellites.png)
-
-### 🔴 FLIR Mode — Human Assets Tracking
-![FLIR](docs/screenshots/02_flir_mode_human_assets.png)
-
-### ▶️ Playback Mode — Historical Replay
-![Playback](docs/screenshots/03_playback_anime_mode.png)
-
-### 🗺️ Route Ops — Corridor Intelligence
-![Route Ops](docs/screenshots/04_route_ops_corridor.png)
-
-### 📰 News Feed — Live OSINT Dashboard
-![News](docs/screenshots/05_news_feed_dashboard.png)
-
-### 🌑 NOIR Mode — GPS Jamming + AI Chat
-![NOIR](docs/screenshots/06_noir_gps_jamming_ai_chat.png)
